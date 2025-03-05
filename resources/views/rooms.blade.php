@@ -254,6 +254,21 @@
         </div>
     </div>
 
+    {{-- Add SweetAlert --}}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        @if(session('success'))
+            swal("Success", "{{ session('success') }}", "success", {
+                button: null
+            });
+        @endif
+        @if(session('error'))
+            swal("Error", "{{ session('error') }}", "error", {
+                button: null
+            });
+        @endif
+    </script>
+
 </body>
 
 </html>
