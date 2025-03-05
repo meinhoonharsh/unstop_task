@@ -27,15 +27,10 @@ class AppController extends Controller
         foreach ($bookedRooms as $room) {
             $room->update(['is_booked' => true]);
         }
-        
-        $data = [
-            'rooms' =>Room::orderBy('floor')->orderBy('room_number')->get(),
-            'bookedRooms' => $bookedRooms->pluck('room_number')->toArray()
+        $bookedRooms = $bookedRooms->pluck('room_number')->toArray();
 
-        ];
-
-        return view('rooms', $data)->with('success', 'Rooms booked successfully.');
-       }
+        return  redirect()->back()-> with(['bookedRooms' => $bookedRooms, 'success' => 'Rooms booked successfully.']);
+    }
 
     private function findOptimalRooms($rooms, $numRooms)
     {
@@ -95,7 +90,7 @@ class AppController extends Controller
     public function reset()
     {
         Room::query()->update(['is_booked' => false]);
-        return redirect()->back()->with('success', 'All roomss reset.');
+        return redirect()->back()->with('success', 'All rooms reset.');
     }
 
     public function random()

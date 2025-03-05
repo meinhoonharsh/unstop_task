@@ -1,5 +1,7 @@
 @php
-    $bookedRooms = $bookedRooms ?? [];
+
+    $rooms = \App\Models\Room::orderBy('floor')->orderBy('room_number')->get();
+    $bookedRooms = session('bookedRooms', []);
 
     $roomStatus = function ($room_number, $isbooked) use ($bookedRooms) {
         if (in_array($room_number, $bookedRooms)) {
@@ -16,7 +18,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-
         .container {
             margin: 0 auto;
             width: 90%;
