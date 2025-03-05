@@ -17,8 +17,9 @@ class RoomSeeder extends Seeder
         $rooms = [];
         for ($i = 1; $i <= $totalRooms; $i++) {
             $floor = ceil($i / 10);
+            $room_number = ($floor * 100) + ($i % 10 ?? 10);
             $rooms[] = [
-                'room_number' => ($floor * 100) + ($i % 10),
+                'room_number' => $room_number,
                 'floor' => $floor,
                 'is_booked' => false,
             ];
